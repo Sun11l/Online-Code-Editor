@@ -1,22 +1,21 @@
 {
-  "name": "online-code-editor",
-  "version": "1.0.0",
-  "description": "---",
-  "main": "server_01.js",
+  "name": "express-app1",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/songwonderful/Online-Code-Editor.git"
+  "description": "ExpressApp1",
+  "author": {
+    "name": ""
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/songwonderful/Online-Code-Editor/issues"
-  },
-  "homepage": "https://github.com/songwonderful/Online-Code-Editor#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.0",
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "^2.3.0"
   }
 }
