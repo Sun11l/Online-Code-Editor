@@ -36,10 +36,17 @@
     </Compile>
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
+    <Content Include=".gitignore" />
     <Content Include="editor.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="package.json" />
+    <Content Include="public\data\test1.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\data\test2.txt">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\stylesheets\code_editor.css">
       <SubType>Code</SubType>
     </Content>

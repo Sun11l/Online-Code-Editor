@@ -33,3 +33,31 @@ function postData(path, data) {
 function showExistingFile() {
 
 }
+
+function loadExistingFileName() {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function () {
+		console.log("Get response.")
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			console.log(xmlhttp.responseText);
+			//document.getElementById("existingFileName").innerHTML = xmlhttp.responseText;
+			var template = '<option value="example">example</option>\n';
+			var generateHTML = "";
+			var fileNameList = xmlhttp.responseText.split("\n");
+			fileNameList.pop();
+			console.log(fileNameList);
+			for (var i = 0; i < fileNameList.length; i++) {
+				generateHTML += template.replace(/example/g, fileNameList[i]);
+			}
+			console.log("generateHTML: " + generateHTML);
+
+			document.getElementById('existingFileName').innerHTML = generateHTML;
+		}
+	}
+	xmlhttp.open("GET", '/existingFile', true);
+	xmlhttp.send();
+}
+
+window.onload = function () {
+	this.console.log("All done.")
+}

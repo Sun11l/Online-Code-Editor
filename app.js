@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,6 +24,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.get("/existingFile", function (req, res) {
+	console.log("Handle get request: request existing file");
+	var responceText = '';
+	var targetDir = process.cwd() + '/public/data';
+	console.log("Taregt dir: " + targetDir);
+	fs.readdir(targetDir, (err, files) => {
+		files.forEach(file => {
+			var temp = file + '\n';
+			responceText += temp;
+			console.log(file);
+		})
+		console.log("Responce text: " + responceText);
+		res.send(responceText);
+	});
+	//console.log("Responce text: " + responceText);
+	//res.send(responceText);
+});
+
 
 app.use('/', routes);
 app.use('/users', users);
@@ -57,6 +78,7 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
+
 
 app.set('port', process.env.PORT || 3000);
 

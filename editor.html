@@ -12,11 +12,11 @@
             <textarea rows="24" cols="100" class="input" id='code' name='code' autofocus required wrap="soft"></textarea>
             <br>
             <div id='panel'>
-                <select>
-
+                <select class="button" id="existingFileName">
                 </select>
+                <button class="button" onclick="loadExistingFileName()">Load</button>
                 <input class="input" id="filename" type="text" name="filename" placeholder="Input filename:" required />
-                <input class="input" id="folder" type="text" name="folder" placeholder="Input folder name:"  />
+                <input class="input" id="folder" type="text" name="folder" placeholder="Input folder name:"  hidden />
                 <input class="button" type="submit" value="Submit">
                 <button class="button" id='danger' onclick="clearCode()">Clear</button>
             </div>
