@@ -47,6 +47,8 @@
     <Content Include="public\data\test2.txt">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\images\sublimetext.ico" />
+    <Content Include="public\images\sublimetext.svg" />
     <Content Include="public\stylesheets\code_editor.css">
       <SubType>Code</SubType>
     </Content>

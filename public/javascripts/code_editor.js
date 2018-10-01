@@ -12,11 +12,11 @@ function submitCode() {
 
 function clearCode() {
 	if (confirm("Warning: Your code will be cleared!")) {
-
+		document.getElementById('code').value = "";
 	}
 }
 
-function postData(path, data) {
+function postData(path, data) {  // 已经被废弃
 	var form = document.createElement("form");
 	form.setAttribute('method', "post");
 	form.setAttribute('action', path);
@@ -58,6 +58,109 @@ function loadExistingFileName() {
 	xmlhttp.send();
 }
 
+
+function submitCode() {
+	var code = document.getElementById('code').value;
+	var filename = document.getElementById('filename').value;
+	$.post('/', { 'code': code, 'filename': filename }, function (result) {
+		loadExistingFileName();
+		console.log("update filename list: " + filename);
+	});
+	
+}
+
+
+function loadFile() {
+	var selectTag = document.getElementById('existingFileName');
+	var selectedFileName = selectTag.options[selectTag.selectedIndex].value;
+	console.log("Select file: " + selectedFileName);
+	$.post('/getFile', { 'filename': selectedFileName }, function (result) {
+		console.log("Get file content:" + result);
+		document.getElementById('code').value = result;
+		document.getElementById('filename').value = selectedFileName;
+	});
+
+}
+
+
+
 window.onload = function () {
-	this.console.log("All done.")
+	//this.console.log("All done.")
+	loadExistingFileName();
+}
+
+
+//$(document).ready(function () {
+//	$("button").click(function () {
+//		$.ajax({
+//			url: "demo_test.txt", success: function (result) {
+//				$("#div1").html(result);
+//			}
+//		});
+//	});
+//});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function submitCode2() {  // 存在问题
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function () {
+		console.log("Get response after post code")
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			console.log(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("POST", '/', true);
+	var code = document.getElementById('code').value;
+	var filename = document.getElementById('filename').value;
+	var postData = "code=" + code + "&filename=" + filename;
+	console.log("Post data: " + postData);
+	xmlhttp.send(postData);
+
+}
+
+
+
+function loadFile2() {  // 存在问题
+	var selectTag = document.getElementById('existingFileName');
+	var selectedFileName = selectTag.options[selectTag.selectedIndex].value;
+	console.log("Select file: " + selectedFileName);
+
+
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function () {
+		console.log("Get response.")
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			console.log("Get file content:" + xmlhttp.responseText);
+			document.getElementById('code').value = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("POST", '/getFile', true);
+	var postData = "filename=" + selectedFileName + "&";
+	console.log("Post data: " + postData);
+	xmlhttp.send(postData);
+
 }

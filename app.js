@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get("/existingFile", function (req, res) {
-	console.log("Handle get request: request existing file");
+	console.log("Handle get request: request existing file name");
 	var responceText = '';
 	var targetDir = process.cwd() + '/public/data';
 	console.log("Taregt dir: " + targetDir);
@@ -35,14 +35,32 @@ app.get("/existingFile", function (req, res) {
 		files.forEach(file => {
 			var temp = file + '\n';
 			responceText += temp;
-			console.log(file);
+			//console.log(file);
 		})
-		console.log("Responce text: " + responceText);
+		//console.log("Responce text: " + responceText);
+		console.log("Responce request: existing files name list")
 		res.send(responceText);
 	});
 	//console.log("Responce text: " + responceText);
 	//res.send(responceText);
 });
+
+
+app.post('/getFile', function (req, res) {
+	console.log("Handle post request: request file");
+	var targetDir = process.cwd() + '/public/data/';
+	var targetFile = targetDir + req.body.filename;
+	console.log("Target file: " + targetFile);
+	fs.readFile(targetFile, 'utf-8', function (err, data) {  //!
+		if (err) {
+			console.log("Read file: " + targetFile + " failed.");
+		} else {
+			console.log("Read file: " + targetFile + " successed.");
+			res.send(data);
+			console.log("data: " + data);
+		}
+	})
+})
 
 
 app.use('/', routes);
